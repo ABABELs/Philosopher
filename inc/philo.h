@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:57 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/06/26 12:10:56 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/06/28 13:39:58 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define ERROR_IN_1 "INVALID INPUT CHARACTER"
 # define ERROR_IN_2 "INVALID INPUT VALUES"
+
+# define TH_ERROR "ERROR WHILE CREATING THREADS"
 
 typedef struct s_philo
 {
@@ -56,6 +58,13 @@ typedef struct s_data
 	pthread_mutex_t	write;
 }	t_data;
 
-int	init(t_data *data, char **argv, int argc);
-
+int		init(t_data *data, char **argv, int argc);
+int		init_philos(t_data *data);
+int		init_data(t_data *data, char **argv, int argc);
+int		init_forks(t_data *data);
+int		alloc(t_data *data);
+int		ft_usleep(useconds_t time);
+void	ft_exit(t_data *data);
+void	clear_data(t_data *data);
+int		one_philo(t_data *data);
 #endif
