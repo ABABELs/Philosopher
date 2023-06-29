@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:57 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/06/28 13:39:58 by aabel            ###   ########.fr       */
+/*   Updated: 2023/06/29 15:55:32 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define ERROR_IN_2 "INVALID INPUT VALUES"
 
 # define TH_ERROR "ERROR WHILE CREATING THREADS"
+# define JOIN_ERR "ERROR WHILE JOINING THREADS"
+# define INIT_ERR_1 "ERROR WHILE INIT FORKS"
+
+# define TAKE_FORKS "has taken a fork"
+# define THINKING "is thinking"
+# define SLEEPING "is sleeping"
+# define EATING "is eating"
+# define DIED "died"
 
 typedef struct s_philo
 {
@@ -67,4 +75,10 @@ int		ft_usleep(useconds_t time);
 void	ft_exit(t_data *data);
 void	clear_data(t_data *data);
 int		one_philo(t_data *data);
+int		error(char *str, t_data *data);
+int		thread_init(t_data *data);
+void	*routine(void *philo_pointer);
+void	*supervisor(void *philo_pointer);
+void	*monitor(void *data_pointer);
+
 #endif

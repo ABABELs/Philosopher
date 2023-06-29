@@ -6,7 +6,7 @@
 #    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/26 10:59:45 by arthurabel        #+#    #+#              #
-#    Updated: 2023/06/28 13:36:10 by aabel            ###   ########.fr        #
+#    Updated: 2023/06/29 15:48:31 by aabel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = philo
 SRC =	src/philosopher.c \
 		src/utils/init.c \
 		src/utils/utils.c \
-
+		src/utils/threads.c \
 
 OBJ = $(SRC:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:54 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/06/28 13:35:19 by aabel            ###   ########.fr       */
+/*   Updated: 2023/06/29 14:37:02 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	one_philo(t_data *data)
 	data->start_time = get_time();
 	if (pthread_create(&data->tid[0], NULL, &routine, &data->philos[0]))
 		return (error(TH_ERROR, data));
-	pthread_detach(data->tid[0], NULL);
+	pthread_detach(data->tid[0]);
 	while (data->dead == 0)
 		ft_usleep(0);
 	ft_exit(data);
@@ -49,13 +49,24 @@ void	ft_exit(t_data *data)
 	clear_data(data);
 }
 
+int	error(char *str, t_data *data)
+{
+	printf("%s\n", str);
+	if (data)
+		ft_exit(data);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	init(&data, argv, argc);
+	if (init(&data, argv, argc))
+		return (1);
 	if (data.philo_num == 1)
 		return (one_philo(&data));
-	philo(&data);
+	if (thread_init(&data))
+		return (1);
+	ft_exit(&data);
 	return (0);
 }

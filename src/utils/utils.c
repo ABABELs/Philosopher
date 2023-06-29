@@ -6,11 +6,11 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 11:45:11 by aabel             #+#    #+#             */
-/*   Updated: 2023/06/28 13:40:32 by aabel            ###   ########.fr       */
+/*   Updated: 2023/06/29 14:36:55 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/philo.h"
+#include "../../inc/philo.h"
 
 int	ft_usleep(useconds_t time)
 {
