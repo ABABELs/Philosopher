@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:07:56 by aabel             #+#    #+#             */
-/*   Updated: 2023/06/29 16:20:30 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/03 12:08:41 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,33 @@ void	take_forks(t_philo *philo)
 
 void	drop_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
 	messages(SLEEPING, philo);
 	ft_usleep(philo->data->sleep_time);
 }
 
 void	messages(char *str, t_philo *philo)
 {
-	u_int16_t	time;
+	u_int64_t	time;
 
 	pthread_mutex_lock(&philo->data->write);
 	time = get_time() - philo->data->start_time;
 	if (ft_strcmp(DIED, str) == 0 && philo->data->dead == 0)
 	{
-		printf("%u %d %s\n", time, philo->id, str);
+		printf("%llu %d %s\n", time, philo->id, str);
 		philo->data->dead = 1;
 	}
 	if (!philo->data->dead)
-		printf("%u %d %s\n", time, philo->id, str);
+		printf("%llu %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);
 }
 
 u_int64_t	get_time(void)
 {
-	struct timeval	time;
+	struct timeval	tv;
 
-	if (gettimeofday(&time, NULL))
-		return (error("Error: gettimeofday\n", NULL));
-	return ((time.tv_sec * (u_int64_t)1000) + (time.tv_usec / 1000));
+	if (gettimeofday(&tv, NULL))
+		return (error("gettimeofday() FAILURE\n", NULL));
+	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }

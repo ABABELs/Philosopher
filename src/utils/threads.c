@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:40:12 by aabel             #+#    #+#             */
-/*   Updated: 2023/06/29 16:07:21 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/03 12:18:23 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*monitor(void *data_pointer)
 {
 	t_philo	*philo;
 
-	philo = (t_philo *)data_pointer;
+	philo = (t_philo *) data_pointer;
 	pthread_mutex_lock(&philo->data->write);
 	printf("data val: %d", philo->data->dead);
 	pthread_mutex_unlock(&philo->data->write);
@@ -25,7 +25,7 @@ void	*monitor(void *data_pointer)
 		pthread_mutex_lock(&philo->lock);
 		if (philo->data->finished >= philo->data->philo_num)
 			philo->data->dead = 1;
-		pthread_mutex_lock(&philo->data->write);
+		pthread_mutex_lock(&philo->lock);
 	}
 	return ((void *)0);
 }
@@ -86,12 +86,13 @@ int	thread_init(t_data *data)
 	{
 		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (error(TH_ERROR, data));
+		ft_usleep(1);
 	}
 	i = -1;
 	while (++i < data->philo_num)
 	{
 		if (pthread_join(data->tid[i], NULL))
-			return (error(TH_ERROR, data));
+			return (error(JOIN_ERR, data));
 	}
 	return (0);
 }

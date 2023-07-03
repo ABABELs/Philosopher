@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:40:23 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/07/03 11:12:42 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/03 11:52:02 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	init_data(t_data *data, char **argv, int argc)
 	data->eat_time = ft_atoi(argv[3]);
 	data->sleep_time = ft_atoi(argv[4]);
 	if (argc == 6)
-		data->meals_nb = ft_atoi(argv[5]);
+		data->meals_nb = (int) ft_atoi(argv[5]);
 	else
 		data->meals_nb = -1;
 	if (data->philo_num <= 0 || data->philo_num > 200 || data->death_time < 0
