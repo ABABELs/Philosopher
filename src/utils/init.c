@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:40:23 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/06/29 14:36:50 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/03 11:12:42 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	alloc(t_data *data)
 	data->philos = malloc(sizeof(t_philo) * data->philo_num);
 	if (!data->philos)
 		return (error(ALLOC_ERROR_3, data));
+	return (0);
 }
 
 int	init_data(t_data *data, char **argv, int argc)
@@ -62,6 +63,7 @@ int	init_forks(t_data *data)
 		data->philos[i].r_fork = &data->forks[i - 1];
 		i++;
 	}
+	return (0);
 }
 
 int	init_philos(t_data *data)
@@ -79,6 +81,7 @@ int	init_philos(t_data *data)
 		data->philos[i].status = 0;
 		pthread_mutex_init(&data->philos[i].lock, NULL);
 	}
+	return (0);
 }
 
 int	init(t_data *data, char **argv, int argc)

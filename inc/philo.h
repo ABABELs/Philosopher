@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:57 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/06/29 15:55:32 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/03 11:09:36 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 # define ALLOC_ERROR_1 "ERROR WHILE ALLOCATING THREADS IDs"
 # define ALLOC_ERROR_3 "ERROR WHILE ALLOCATING PHILOS"
@@ -66,19 +67,27 @@ typedef struct s_data
 	pthread_mutex_t	write;
 }	t_data;
 
-int		init(t_data *data, char **argv, int argc);
-int		init_philos(t_data *data);
-int		init_data(t_data *data, char **argv, int argc);
-int		init_forks(t_data *data);
-int		alloc(t_data *data);
-int		ft_usleep(useconds_t time);
-void	ft_exit(t_data *data);
-void	clear_data(t_data *data);
-int		one_philo(t_data *data);
-int		error(char *str, t_data *data);
-int		thread_init(t_data *data);
-void	*routine(void *philo_pointer);
-void	*supervisor(void *philo_pointer);
-void	*monitor(void *data_pointer);
-
+int			init(t_data *data, char **argv, int argc);
+int			ft_atoi(const char *str);
+//int			init_philos(t_data *data);
+//int			init_data(t_data *data, char **argv, int argc);
+//int			init_forks(t_data *data);
+//int			alloc(t_data *data);
+int			ft_usleep(useconds_t time);
+void		ft_exit(t_data *data);
+//void		clear_data(t_data *data);
+//int			one_philo(t_data *data);
+int			error(char *str, t_data *data);
+int			thread_init(t_data *data);
+void		*routine(void *philo_pointer);
+//void		*supervisor(void *philo_pointer);
+//void		*monitor(void *data_pointer);
+void		eat(t_philo *philo);
+void		take_forks(t_philo *philo);
+void		drop_forks(t_philo *philo);
+void		messages(char *str, t_philo *philo);
+u_int64_t	get_time(void);
+int			ft_strcmp(char *s1, char *s2);
+//bool		is_in_string(char c, char *str);
+int			input_checker(char **argv);
 #endif

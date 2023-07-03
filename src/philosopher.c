@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philospher.c                                       :+:      :+:    :+:   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:54 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/06/29 14:37:02 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/03 11:02:48 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	one_philo(t_data *data)
 	while (data->dead == 0)
 		ft_usleep(0);
 	ft_exit(data);
-	retuurn (0);
+	return (0);
 }
 
 void	clear_data(t_data *data)
@@ -61,6 +61,10 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	if (argc < 5 || argc > 6)
+		return (1);
+	if (input_checker(argv))
+		return (1);
 	if (init(&data, argv, argc))
 		return (1);
 	if (data.philo_num == 1)
