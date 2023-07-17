@@ -6,18 +6,18 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 11:45:11 by aabel             #+#    #+#             */
-/*   Updated: 2023/07/03 12:11:05 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/17 15:45:39 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-int	ft_usleep(useconds_t time)
+int	ft_usleep(int time)
 {
 	uint64_t	start;
 
 	start = get_time();
-	while ((get_time() - start) < time)
+	while (get_time() < (start + time))
 		usleep(time / 10);
 	return (0);
 }

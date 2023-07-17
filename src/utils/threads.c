@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:40:12 by aabel             #+#    #+#             */
-/*   Updated: 2023/07/03 12:18:23 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/17 16:45:18 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*monitor(void *data_pointer)
 		pthread_mutex_lock(&philo->lock);
 		if (philo->data->finished >= philo->data->philo_num)
 			philo->data->dead = 1;
-		pthread_mutex_lock(&philo->lock);
+		pthread_mutex_unlock(&philo->lock);
 	}
 	return ((void *)0);
 }
@@ -77,16 +77,16 @@ int	thread_init(t_data *data)
 
 	i = -1;
 	data->start_time = get_time();
-	if (data->meals_nb > 0)
-	{
-		if (pthread_create(&t0, NULL, &monitor, &data->philos[0]))
-			return (error(TH_ERROR, data));
-	}
 	while (++i < data->philo_num)
 	{
 		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (error(TH_ERROR, data));
 		ft_usleep(1);
+	}
+	if (data->meals_nb > 0)
+	{
+		if (pthread_create(&t0, NULL, &monitor, &data->philos[0]))
+			return (error(TH_ERROR, data));
 	}
 	i = -1;
 	while (++i < data->philo_num)

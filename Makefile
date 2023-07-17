@@ -6,7 +6,7 @@
 #    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/26 10:59:45 by arthurabel        #+#    #+#              #
-#    Updated: 2023/07/03 12:19:50 by aabel            ###   ########.fr        #
+#    Updated: 2023/07/17 15:06:29 by aabel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC =	src/philosopher.c \
 
 OBJ = $(SRC:%.c=%.o)
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+FLAGS = -Wall -Wextra -Werror 
 
 CC = gcc
 

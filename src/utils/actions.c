@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:07:56 by aabel             #+#    #+#             */
-/*   Updated: 2023/07/03 12:08:41 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/17 17:16:24 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,40 @@ void	eat(t_philo *philo)
 {
 	take_forks(philo);
 	pthread_mutex_lock(&philo->lock);
-	philo->eating = 1;
 	philo->time_to_die = philo->data->death_time + get_time();
+	philo->eating = 1;
 	messages(EATING, philo);
-	philo->eat_cont++;
 	ft_usleep(philo->data->eat_time);
+	philo->eat_cont++;
 	philo->eating = 0;
-	pthread_mutex_unlock(&philo->lock);
 	drop_forks(philo);
+	pthread_mutex_unlock(&philo->lock);
 }
 
 void	take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(philo->r_fork);
-	messages(TAKE_FORKS, philo);
-	pthread_mutex_lock(philo->l_fork);
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(philo->l_fork);
+		messages(TAKE_FORKS, philo);
+		pthread_mutex_lock(philo->r_fork);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->r_fork);
+		messages(TAKE_FORKS, philo);
+		pthread_mutex_lock(philo->l_fork);
+	}
 	messages(TAKE_FORKS, philo);
 }
+
+// void	take_forks(t_philo *philo)
+// {
+// 	pthread_mutex_lock(philo->r_fork);
+// 	messages(TAKE_FORKS, philo);
+// 	pthread_mutex_lock(philo->l_fork);
+// 	messages(TAKE_FORKS, philo);
+// }
 
 void	drop_forks(t_philo *philo)
 {

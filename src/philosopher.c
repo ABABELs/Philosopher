@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:54 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/07/03 11:48:17 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/04 14:58:11 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc < 5 || argc > 6)
+	{
+		printf("You must try like this :\n ./philo 5 810 200 200\n");
+		printf("or\n ./philo 4 410 200 200\n");
 		return (1);
+	}
 	if (input_checker(argv))
 		return (1);
 	if (init(&data, argv, argc))

@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:57 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/07/03 11:09:36 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/17 15:36:13 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ft_atoi(const char *str);
 //int			init_data(t_data *data, char **argv, int argc);
 //int			init_forks(t_data *data);
 //int			alloc(t_data *data);
-int			ft_usleep(useconds_t time);
+int			ft_usleep(int time);
 void		ft_exit(t_data *data);
 //void		clear_data(t_data *data);
 //int			one_philo(t_data *data);
