@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:07:56 by aabel             #+#    #+#             */
-/*   Updated: 2023/07/17 17:16:24 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/18 12:59:53 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	eat(t_philo *philo)
 {
 	take_forks(philo);
-	pthread_mutex_lock(&philo->lock);
+	// pthread_mutex_lock(&philo->lock);
 	philo->time_to_die = philo->data->death_time + get_time();
 	philo->eating = 1;
 	messages(EATING, philo);
 	ft_usleep(philo->data->eat_time);
 	philo->eat_cont++;
 	philo->eating = 0;
+	// pthread_mutex_unlock(&philo->lock);
 	drop_forks(philo);
-	pthread_mutex_unlock(&philo->lock);
 }
 
 void	take_forks(t_philo *philo)

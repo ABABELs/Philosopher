@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:40:12 by aabel             #+#    #+#             */
-/*   Updated: 2023/07/17 16:45:18 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/18 13:06:43 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	*routine(void *philo_pointer)
 		return ((void *)1);
 	while (philo->data->dead == 0)
 	{
+		pthread_mutex_lock(&philo->lock);
 		eat(philo);
 		messages(THINKING, philo);
+		pthread_mutex_unlock(&philo->lock);
 	}
 	if (pthread_join(philo->t1, NULL))
 		return ((void *)1);
@@ -77,16 +79,16 @@ int	thread_init(t_data *data)
 
 	i = -1;
 	data->start_time = get_time();
-	while (++i < data->philo_num)
-	{
-		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
-			return (error(TH_ERROR, data));
-		ft_usleep(1);
-	}
 	if (data->meals_nb > 0)
 	{
 		if (pthread_create(&t0, NULL, &monitor, &data->philos[0]))
 			return (error(TH_ERROR, data));
+	}
+	while (++i < data->philo_num)
+	{
+		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
+			return (error(TH_ERROR, data));
+		ft_usleep(0);
 	}
 	i = -1;
 	while (++i < data->philo_num)

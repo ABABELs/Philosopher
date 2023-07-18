@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 11:45:11 by aabel             #+#    #+#             */
-/*   Updated: 2023/07/17 15:45:39 by aabel            ###   ########.fr       */
+/*   Updated: 2023/07/18 13:02:17 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_usleep(int time)
 
 	start = get_time();
 	while (get_time() < (start + time))
-		usleep(time / 10);
+		usleep(100);
 	return (0);
 }
 
