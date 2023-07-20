@@ -6,7 +6,7 @@
 /*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:07:56 by aabel             #+#    #+#             */
-/*   Updated: 2023/07/18 12:59:53 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/07/20 16:42:11 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 
 void	eat(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->lock);
 	take_forks(philo);
-	// pthread_mutex_lock(&philo->lock);
+	// pthread_mutex_unlock(&philo->lock);
 	philo->time_to_die = philo->data->death_time + get_time();
+	// pthread_mutex_lock(&philo->data->lock);
 	philo->eating = 1;
+	// pthread_mutex_unlock(&philo->data->lock);
 	messages(EATING, philo);
 	ft_usleep(philo->data->eat_time);
-	philo->eat_cont++;
+	// pthread_mutex_lock(&philo->data->lock);
 	philo->eating = 0;
-	// pthread_mutex_unlock(&philo->lock);
+	philo->eat_cont++;
+	// pthread_mutex_unlock(&philo->data->lock);
+	// pthread_mutex_lock(&philo->lock);
 	drop_forks(philo);
+	pthread_mutex_unlock(&philo->lock);
+	// messages(THINKING, philo);
 }
 
 void	take_forks(t_philo *philo)
@@ -57,6 +64,7 @@ void	drop_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 	messages(SLEEPING, philo);
 	ft_usleep(philo->data->sleep_time);
+	messages(THINKING, philo);
 }
 
 void	messages(char *str, t_philo *philo)
@@ -65,12 +73,11 @@ void	messages(char *str, t_philo *philo)
 
 	pthread_mutex_lock(&philo->data->write);
 	time = get_time() - philo->data->start_time;
-	if (ft_strcmp(DIED, str) == 0 && philo->data->dead == 0)
+	if ((ft_strcmp(DIED, str) == 0 && philo->eating == 0))
 	{
 		printf("%llu %d %s\n", time, philo->id, str);
-		philo->data->dead = 1;
 	}
-	if (!philo->data->dead)
+	if ((philo->eat_cont <= philo->data->meals_nb) || !philo->data->dead)//|| philo->data->dead == 1
 		printf("%llu %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);
 }
