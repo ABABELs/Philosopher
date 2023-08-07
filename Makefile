@@ -6,7 +6,7 @@
 #    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/26 10:59:45 by arthurabel        #+#    #+#              #
-#    Updated: 2023/07/17 15:06:29 by aabel            ###   ########.fr        #
+#    Updated: 2023/08/07 15:53:12 by aabel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ SRC =	src/philosopher.c \
 		src/utils/threads.c \
 		src/utils/actions.c \
 
-OBJ = $(SRC:%.c=%.o)
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread
 
-FLAGS = -Wall -Wextra -Werror 
+OBJ = $(SRC:%.c=%.o)
 
 CC = gcc
 
