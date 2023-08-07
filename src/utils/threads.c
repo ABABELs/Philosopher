@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:40:12 by aabel             #+#    #+#             */
-/*   Updated: 2023/08/07 16:34:42 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/07 17:16:00 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ void	*routine(void *philo_pointer)
 	{
 		eat(philo);
 		messages(THINKING, philo);
+		pthread_mutex_lock(&philo->data->lock);
 		if (philo->data->meals_nb > 0)
 		{
 			if ((philo->eat_cont >= philo->data->meals_nb))
 				break ;
 		}
+		pthread_mutex_unlock(&philo->data->lock);
 	}
 	if (pthread_join(philo->t1, NULL))
 		return ((void *)1);
@@ -91,10 +93,8 @@ int	thread_init(t_data *data)
 	{
 		if (pthread_create(&t0, NULL, &monitor, &data->philos[0]))
 			return (error(TH_ERROR, data));
+		pthread_join(t0, NULL);
 	}
-	if (data->meals_nb > 0)
-		if (pthread_join(t0, NULL))
-			return (error(JOIN_ERR, data));
 	i = -1;
 	while (++i < data->philo_num)
 	{
