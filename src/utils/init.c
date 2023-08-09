@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:40:23 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/07/20 01:08:12 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/08/09 16:23:36 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	init_data(t_data *data, char **argv, int argc)
 	else
 		data->meals_nb = -1;
 	if (data->philo_num <= 0 || data->philo_num > 200 || data->death_time < 0
-		|| data->eat_time < 0 || data->sleep_time < 0)
+		|| data->eat_time < 0 || data->sleep_time < 0 || check_in(data) == 1)
 		return (error(ERROR_IN_2, NULL));
 	data->dead = 0;
 	data->finished = 0;

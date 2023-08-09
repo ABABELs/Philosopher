@@ -6,7 +6,7 @@
 #    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/26 10:59:45 by arthurabel        #+#    #+#              #
-#    Updated: 2023/08/09 16:07:23 by aabel            ###   ########.fr        #
+#    Updated: 2023/08/09 16:27:34 by aabel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC =	src/philosopher.c \
 		src/utils/utils.c \
 		src/utils/threads.c \
 		src/utils/actions.c \
+		src/utils/utils_1.c \
 
 OBJ = $(SRC:%.c=%.o)
 

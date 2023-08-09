@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:40:12 by aabel             #+#    #+#             */
-/*   Updated: 2023/08/09 16:04:14 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/09 17:08:40 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 void	*monitor(void *data_pointer)
 {
 	t_philo	*philo;
+	int		i;
 
+	i = 0;
 	philo = (t_philo *) data_pointer;
 	while (philo->data->dead == 0)
 	{
 		pthread_mutex_lock(&philo->data->lock);
-		if (philo->data->finished >= philo->data->philo_num)
-			philo->data->dead = 1;
+		while (&philo->data->philos[i])
+		{
+			if (philo->eat_cont < philo->data->meals_nb)
+				break ;
+			else if (philo->eat_cont >= philo->data->meals_nb && i >= philo->data->philo_num)
+			{
+				philo->data->dead = 1;
+				break ;
+			}
+			else
+				i++;
+		}
 		pthread_mutex_unlock(&philo->data->lock);
 	}
 	return ((void *)0);
@@ -32,14 +44,14 @@ void	*supervisor(void *philo_pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_pointer;
-	while (philo->data->dead == 0 && (philo->status == 0 || philo->status == 1))
+	while (philo->data->dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
-		if (get_time() > philo->time_to_die && philo->data->dead == 0)
+		if (get_time() >= philo->time_to_die && philo->data->dead == 0)
 		{
 			messages(DIED, philo);
 		}
-		if (philo->eat_cont == philo->data->meals_nb && philo->status == 0)
+		if (philo->eat_cont >= philo->data->meals_nb && philo->data->dead == 0)
 		{
 			pthread_mutex_lock(&philo->data->lock);
 			philo->data->finished++;
