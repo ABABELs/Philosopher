@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:15:45 by aabel             #+#    #+#             */
-/*   Updated: 2023/08/10 12:32:52 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/10 15:03:33 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	check_in(t_data *data)
 	else
 		return (0);
 }
-
 
 int	check_all_fill_eat(t_philo *philo)
 {

@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 14:40:12 by aabel             #+#    #+#             */
-/*   Updated: 2023/08/10 14:25:46 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/10 15:03:26 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	*supervisor(void *philo_pointer)
 			&& philo->data->dead == 0 && philo->data->meals_nb > 0)
 		{
 			pthread_mutex_lock(&philo->data->lock);
-			// philo->data->finished++;
 			philo->eat_cont++;
 			pthread_mutex_unlock(&philo->data->lock);
 			break ;
