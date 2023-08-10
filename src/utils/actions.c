@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:07:56 by aabel             #+#    #+#             */
-/*   Updated: 2023/08/09 16:01:02 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/10 14:27:31 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 void	eat(t_philo *philo)
 {
 	take_forks(philo);
-	pthread_mutex_lock(&philo->lock);
 	philo->time_to_die = philo->data->death_time + get_time();
 	philo->eating = 1;
 	messages(EATING, philo);
 	ft_usleep(philo->data->eat_time);
 	philo->eating = 0;
 	philo->eat_cont++;
-	pthread_mutex_unlock(&philo->lock);
 	drop_forks(philo);
 }
 
@@ -61,7 +59,9 @@ void	messages(char *str, t_philo *philo)
 	if ((ft_strcmp(DIED, str) == 0 && philo->eating == 0))
 	{
 		printf("%llu %d %s\n", time, philo->id, str);
+		pthread_mutex_lock(&philo->data->lock);
 		philo->data->dead = 1;
+		pthread_mutex_unlock(&philo->data->lock);
 	}
 	else if (!philo->data->dead)
 		printf("%llu %d %s\n", time, philo->id, str);

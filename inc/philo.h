@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 10:59:57 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/08/09 16:24:40 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/10 10:49:44 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ int			ft_strcmp(char *s1, char *s2);
 int			input_checker(char **argv);
 int			philo_start(t_data *data);
 int			check_in(t_data *data);
+int			check_all_fill_eat(t_philo *philo);
 #endif
